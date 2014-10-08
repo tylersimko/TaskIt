@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+struct TaskModel {
+    var task: String
+    var description: String
+    var date: NSDate
+}

@@ -9,11 +9,21 @@
 import UIKit
 
 class TaskDetailViewController: UIViewController {
+    
+    var detailsTaskModel: TaskModel!
+    var mainViewController: ViewController!
 
+    @IBOutlet weak var taskTextField: UITextField!
+    @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet weak var dueDatePicker: UIDatePicker!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.taskTextField.text = detailsTaskModel.task
+        self.descriptionTextField.text = detailsTaskModel.description
+        self.dueDatePicker.date = detailsTaskModel.date
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,7 +31,16 @@ class TaskDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func cancelButtonTapped(sender: UIBarButtonItem) {
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
 
+    @IBAction func doneBarButtonItemPressed(sender: UIBarButtonItem) {
+        
+        var task = TaskModel(task: taskTextField.text, description: descriptionTextField.text, date: dueDatePicker.date)
+        mainViewController.taskArray[mainViewController.tableView.indexPathForSelectedRow()!.row] = task
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     /*
     // MARK: - Navigation
 
